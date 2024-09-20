@@ -2,7 +2,7 @@
 import random
 
 class case_gen:
-    culprit_name_list = ["Jerome", "Max", "Zach"] # holds the different possible names for the culprit
+    culprit_name_list = ["Jerome", "Max", "Zach", "Tom", "Carl", "Tim", "Cooper", "Shaw", "Mat"] # holds the different possible names for the culprit
     victim_name_list = ['Sten', 'Troy', 'Dan'] # holds the different possible names for the victim
     murder_weapon_list = ['knife', 'gun', 'baseball bat', 'water'] # holds the different possible murder weapons
     murder_location_list = ['beach', 'park', 'house'] # holds the different possible murder locations
@@ -36,7 +36,8 @@ class case_gen:
         return "Detective " + formatted_name
 
     # generates a random case with random components passed into the case function. this is stored in a json file for comparison with the detective's criminal
-    def generate_case(culprit_name, murder_weapon, murder_location, murder_type, weather, time_of_day, is_witness_present, witness_num, victim_name, has_injury, injury_location):
+    def generate_case(culprit_name, murder_weapon, murder_location, murder_type, weather, time_of_day, is_witness_present, witness_num, victim_name, has_injury, injury_location, suspects):
+        # holds all the values that need to be save to the newly created, locked json file
         case_components = {
             'culprit name': culprit_name,
             'murder weapon': murder_weapon,
@@ -48,9 +49,11 @@ class case_gen:
             'witness number': witness_num,
             'victim name': victim_name,
             'has injury': has_injury,
-            'injury location': injury_location
+            'injury location': injury_location,
+            'selected suspects': suspects
         }
         
+        print(case_components)
         return case_components
     
     # generates a case file from the same content of the case method. this is the story version that the detective sees
@@ -139,9 +142,21 @@ class case_gen:
         return str(number_of_witnesses), witness_present
 
     # returns a list of 4 suspects including 3 random suspects and the returned culprit himself
-    def suspects(suspect_1, suspect_2, suspect_3, suspect_4):
-        # write code to return suspects list that includes the culprit returned and 3 other random suspects
-        return
+    def suspects(culprit, culprit_name_list):
+        selected_suspects = [None] * 4 # creates an empty list of length 4 to be populated with the suspects of the case
+        culprit_index_in_suspects_list = random.randint(0, 3) # generates a random number from within the length of the selected suspects to place the culprit in (the culprit name position is randomized so that the culprit name does not always show up at the same spot)
+        suspects = culprit_name_list.copy() # creates a copy of the culprits name list to act as the suspect pool for the case
+        
+        selected_suspects.insert(culprit_index_in_suspects_list, culprit) # inserts the culprit name at the generated index value
+        
+        remaining_random_suspects = list(filter(lambda item: item != culprit, suspects)) # filters the remaining suspects after the culprit and picks 4 at random
+        
+        # loops through the entire selected suspects list to insert the random suspects in all the spots that do not match the randomly generated index value (where the culprit is present)
+        for i in range(len(selected_suspects)):
+            if i != culprit_index_in_suspects_list:
+                selected_suspects[i] = remaining_random_suspects.pop(0)
+
+        return selected_suspects
 
     # sets all the returned components of the case into their own variables so that the same instance of each function can be used across the different types (case and case file)
     selected_culprit_name = culprit_name(culprit_name_list)
@@ -154,6 +169,7 @@ class case_gen:
     selected_number_of_witness, selected_is_witness_present = number_of_witnesses(is_witness_present())
     selected_victim_name = victim_name(victim_name_list)
     selected_has_injuries = has_injuries(selected_injury_location)
+    selected_suspects_list = suspects(selected_culprit_name, culprit_name_list)
 
     # testing for each of the separate components of the case
 
@@ -167,7 +183,9 @@ class case_gen:
     # print(selected_time_of_day)
     # print(selected_is_witness_present)
     # print(selected_number_of_witness)
+    # print(selected_suspects_list)
+    
 
-    generate_case(selected_culprit_name, selected_weapon, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_is_witness_present, selected_number_of_witness, selected_victim_name, selected_has_injuries, selected_injury_location)
-    print("")
-    generate_case_file(selected_victim_name, selected_weapon, selected_has_injuries, selected_injury_location, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_number_of_witness)
+    generate_case(selected_culprit_name, selected_weapon, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_is_witness_present, selected_number_of_witness, selected_victim_name, selected_has_injuries, selected_injury_location, selected_suspects_list)
+    # print("")
+    # generate_case_file(selected_victim_name, selected_weapon, selected_has_injuries, selected_injury_location, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_number_of_witness)
