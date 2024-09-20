@@ -57,12 +57,12 @@ class case_gen:
         return case_components
     
     # generates a case file from the same content of the case method. this is the story version that the detective sees
-    def generate_case_file(victim_name, murder_weapon, has_injury, injury_location, murder_location, murder_type, weather, time_of_day, witness_num):
+    def generate_case_file(victim_name, murder_weapon, has_injury, injury_location, murder_location, murder_type, weather, time_of_day, witness_num, suspects):
         if has_injury == True:
-            case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas a {murder_weapon} {murder_type} wound on the {injury_location}. It was\na {weather} {time_of_day}, and there is {witness_num} witnesses to this crime'
+            case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas a {murder_weapon} {murder_type} wound on the {injury_location}. It was\na {weather} {time_of_day}, and there is {witness_num} witnesses to this\ncrime. There are {len(suspects)} suspects to this crime. They are\n{suspects}'
             print(case_file)
         else:
-            case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas {murder_type}ing. There were no injuries on the body according\nto autopsy reports. It was a {weather} {time_of_day} and\nthere is {witness_num} witnesses to this crime'
+            case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas {murder_type}ing. There were no injuries on the body according\nto autopsy reports. It was a {weather} {time_of_day} and\nthere is {witness_num} witnesses to this crime. There are {len(suspects)} suspects\nto this crime. Thy are {suspects}'
             print(case_file)
 
     # determines the name of the culprit
@@ -169,7 +169,9 @@ class case_gen:
     selected_number_of_witness, selected_is_witness_present = number_of_witnesses(is_witness_present())
     selected_victim_name = victim_name(victim_name_list)
     selected_has_injuries = has_injuries(selected_injury_location)
+    
     selected_suspects_list = suspects(selected_culprit_name, culprit_name_list)
+    formatted_selected_suspects_list = ', '.join(selected_suspects_list)
 
     # testing for each of the separate components of the case
 
@@ -187,5 +189,5 @@ class case_gen:
     
 
     generate_case(selected_culprit_name, selected_weapon, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_is_witness_present, selected_number_of_witness, selected_victim_name, selected_has_injuries, selected_injury_location, selected_suspects_list)
-    # print("")
-    # generate_case_file(selected_victim_name, selected_weapon, selected_has_injuries, selected_injury_location, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_number_of_witness)
+    print("")
+    generate_case_file(selected_victim_name, selected_weapon, selected_has_injuries, selected_injury_location, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_number_of_witness, formatted_selected_suspects_list)
