@@ -1,7 +1,7 @@
 # murder mystery solve game
 import random
 
-class CaseGen:
+class case_gen:
     culprit_name_list = ["Jerome", "Max", "Zach"] # holds the different possible names for the culprit
     victim_name_list = ['Sten', 'Troy', 'Dan'] # holds the different possible names for the victim
     murder_weapon_list = ['knife', 'gun', 'baseball bat', 'water'] # holds the different possible murder weapons
@@ -37,10 +37,22 @@ class CaseGen:
 
     # generates a random case with random components passed into the case function. this is stored in a json file for comparison with the detective's criminal
     def generate_case(culprit_name, murder_weapon, murder_location, murder_type, weather, time_of_day, is_witness_present, witness_num, victim_name, has_injury, injury_location):
-        print(f'{victim_name}\n{time_of_day}\n{weather}\n{murder_location}\n{murder_weapon}\n{murder_type}\n{is_witness_present}\n{witness_num}\n{culprit_name}\n{has_injury}\n{injury_location}')
+        case_components = {
+            'culprit name': culprit_name,
+            'murder weapon': murder_weapon,
+            'murder location': murder_location,
+            'murder type': murder_type,
+            'weather': weather,
+            'time of day': time_of_day,
+            'witness presence': is_witness_present,
+            'witness number': witness_num,
+            'victim name': victim_name,
+            'has injury': has_injury,
+            'injury location': injury_location
+        }
         
-        return culprit_name, murder_weapon, murder_location, murder_type, weather, time_of_day, is_witness_present, witness_num, victim_name
-
+        return case_components
+    
     # generates a case file from the same content of the case method. this is the story version that the detective sees
     def generate_case_file(victim_name, murder_weapon, has_injury, injury_location, murder_location, murder_type, weather, time_of_day, witness_num):
         if has_injury == True:
