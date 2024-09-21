@@ -57,12 +57,12 @@ class case_gen:
         return case_components
     
     # generates a case file from the same content of the case method. this is the story version that the detective sees
-    def generate_case_file(victim_name, murder_weapon, has_injury, injury_location, murder_location, murder_type, weather, time_of_day, witness_num, suspects):
+    def generate_case_file(victim_name, murder_weapon, has_injury, injury_location, murder_location, murder_type, weather, time_of_day, witness_num, num_suspects, suspects):
         if has_injury == True:
-            case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas a {murder_weapon} {murder_type} wound on the {injury_location}. It was\na {weather} {time_of_day}, and there is {witness_num} witnesses to this\ncrime. There are {len(suspects)} suspects to this crime. They are\n{suspects}'
+            case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas a {murder_weapon} {murder_type} wound on the {injury_location}. It was\na {weather} {time_of_day}, and there is {witness_num} witnesses to this\ncrime. There are {len(num_suspects)} suspects to this crime. They are\n{suspects}'
             print(case_file)
         else:
-            case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas {murder_type}ing. There were no injuries on the body according\nto autopsy reports. It was a {weather} {time_of_day} and\nthere is {witness_num} witnesses to this crime. There are {len(suspects)} suspects\nto this crime. Thy are {suspects}'
+            case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas {murder_type}ing. There were no injuries on the body according\nto autopsy reports. It was a {weather} {time_of_day} and\nthere is {witness_num} witnesses to this crime. There are {len(num_suspects)} suspects\nto this crime. They are {suspects}'
             print(case_file)
 
     # determines the name of the culprit
@@ -155,7 +155,7 @@ class case_gen:
         for i in range(len(selected_suspects)):
             if i != culprit_index_in_suspects_list:
                 selected_suspects[i] = remaining_random_suspects.pop(0)
-
+        print(culprit_index_in_suspects_list)
         return selected_suspects
 
     # sets all the returned components of the case into their own variables so that the same instance of each function can be used across the different types (case and case file)
@@ -190,4 +190,4 @@ class case_gen:
 
     generate_case(selected_culprit_name, selected_weapon, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_is_witness_present, selected_number_of_witness, selected_victim_name, selected_has_injuries, selected_injury_location, selected_suspects_list)
     print("")
-    generate_case_file(selected_victim_name, selected_weapon, selected_has_injuries, selected_injury_location, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_number_of_witness, formatted_selected_suspects_list)
+    generate_case_file(selected_victim_name, selected_weapon, selected_has_injuries, selected_injury_location, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_number_of_witness, selected_suspects_list, formatted_selected_suspects_list)
