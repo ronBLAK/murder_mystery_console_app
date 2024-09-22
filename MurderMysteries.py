@@ -1,6 +1,6 @@
 # murder mystery solve game
 import random
-from save_case import SaveCaseInfo
+from save_case import Save
 
 class CaseGen:
     culprit_name_list = ["Jerome", "Max", "Zach", "Tom", "Carl", "Tim", "Cooper", "Shaw", "Mat"] # holds the different possible names for the culprit
@@ -26,16 +26,6 @@ class CaseGen:
         "smack": ['head', 'neck', 'chest'],
     }
 
-    print("you have been transferred to the detective wing of the police department.")
-    print("")
-
-    # creates a detective profile
-    def profile():
-        name = input("what should the assoiates call you, detective?\n\n") # stores raw name input from user
-        formatted_name = name.capitalize() # formats the name to capital letter first
-        
-        return "Detective " + formatted_name
-
     # generates a random case with random components passed into the case function. this is stored in a json file for comparison with the detective's criminal
     @staticmethod
     def generate_case(culprit_name, murder_weapon, murder_location, murder_type, weather, time_of_day, is_witness_present, witness_num, victim_name, has_injury, injury_location, suspects):
@@ -54,7 +44,7 @@ class CaseGen:
             'injury location': injury_location,
             'selected suspects': suspects
         }
-        SaveCaseInfo.save_case(case_components)
+        Save.save_case(case_components)
         return case_components
     
     # generates a case file from the same content of the case method. this is the story version that the detective sees
@@ -65,7 +55,7 @@ class CaseGen:
         else:
             case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas {murder_type}ing. There were no injuries on the body according\nto autopsy reports. It was a {weather} {time_of_day} and\nthere is {witness_num} witnesses to this crime. There are {len(num_suspects)} suspects\nto this crime. They are {suspects}'
         
-        SaveCaseInfo.save_case_file(case_file)
+        Save.save_case_file(case_file)
         print(case_file)
         return case_file
 
@@ -176,9 +166,3 @@ class CaseGen:
     
     selected_suspects_list = get_suspects(selected_culprit_name, culprit_name_list)
     formatted_selected_suspects_list = ', '.join(selected_suspects_list)
-    
-    # calls all the functions that work to generate the case and case file
-    generate_case(selected_culprit_name, selected_weapon, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_is_witness_present, selected_number_of_witness, selected_victim_name, selected_has_injuries, selected_injury_location, selected_suspects_list)
-    
-    generate_case_file(selected_victim_name, selected_weapon, selected_has_injuries, selected_injury_location, selected_murder_location, selected_murder_type, selected_weather, selected_time_of_day, selected_number_of_witness, selected_suspects_list, formatted_selected_suspects_list)
-    
