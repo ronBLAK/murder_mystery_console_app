@@ -44,6 +44,7 @@ class CaseGen:
             'injury location': injury_location,
             'selected suspects': suspects
         }
+        
         Save.save_case(case_components)
         return case_components
     
@@ -149,7 +150,8 @@ class CaseGen:
         for i in range(len(selected_suspects)):
             if i != culprit_index_in_suspects_list:
                 selected_suspects[i] = remaining_random_suspects.pop(0)
-        print(culprit_index_in_suspects_list)
+                
+        # print(culprit_index_in_suspects_list)
         return selected_suspects
 
     # sets all the returned components of the case into their own variables so that the same instance of each function can be used across the different types (case and case file)
