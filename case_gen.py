@@ -153,18 +153,3 @@ class CaseGen:
                 
         # print(culprit_index_in_suspects_list)
         return selected_suspects
-
-    # sets all the returned components of the case into their own variables so that the same instance of each function can be used across the different types (case and case file)
-    selected_culprit_name = get_culprit_name(culprit_name_list)
-    selected_murder_location = get_murder_location(murder_location_list)
-    selected_weapon = get_murder_weapon(murder_weapon_list)
-    selected_murder_type = get_murder_type(selected_weapon, murder_type_dict)
-    selected_injury_location = get_injury_location(selected_murder_type, injury_location_dict)
-    selected_time_of_day = get_time_of_day(time_of_day_list)
-    selected_weather = get_weather(weather_list)
-    selected_number_of_witness, selected_is_witness_present = get_number_of_witnesses(is_witness_present())
-    selected_victim_name = get_victim_name(victim_name_list)
-    selected_has_injuries = has_injuries(selected_injury_location)
-    
-    selected_suspects_list = get_suspects(selected_culprit_name, culprit_name_list)
-    formatted_selected_suspects_list = ', '.join(selected_suspects_list)
