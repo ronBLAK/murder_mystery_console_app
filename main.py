@@ -2,6 +2,7 @@ from case_gen import CaseGen
 from detective_profile import DetectiveProfile
 import detective_attributes
 import json
+import time
 
 case_data_save_file = 'case data.json' # stores the file name that needs to be opened into a variable
 
@@ -103,7 +104,19 @@ while question_start_solve() != '1':
 
     CaseGen.generate_case_file(pulled_victim_name, pulled_murder_weapon, pulled_has_injury, pulled_injury_location, pulled_murder_location, pulled_murder_type, pulled_weather, pulled_time_of_day, pulled_witness_number, pulled_suspects_list, formatted_suspects_list)
     print('')
-    
-print('the selectee case can now be solved') # just a placeholder for till the clue generation and case solving is implemented
+
+# this is what happens if the user selects a case instead of generating a new case
+print('case selected')
+print('opening investigator menu...')
+print('')
+time.sleep(3)
+
+print('the case is all yours, detective...')
+print('')
+print('1. view detective profile')
+print('2. open your notebook')
+print('3. view case file')
+print('4. open solve and submit menu')
+print('5. search for clues at the crime scene')
 
 # need to save detective info..
