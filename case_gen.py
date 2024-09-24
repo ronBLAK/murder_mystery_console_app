@@ -31,18 +31,18 @@ class CaseGen:
     def generate_case(culprit_name, murder_weapon, murder_location, murder_type, weather, time_of_day, is_witness_present, witness_num, victim_name, has_injury, injury_location, suspects):
         # holds all the values that need to be save to the newly created, locked json file
         case_components = {
-            'culprit name': culprit_name,
-            'murder weapon': murder_weapon,
+            'victim name': victim_name,
             'murder location': murder_location,
+            'murder weapon': murder_weapon,
             'murder type': murder_type,
+            'has injury': has_injury,
+            'injury location': injury_location,
             'weather': weather,
             'time of day': time_of_day,
             'witness presence': is_witness_present,
             'witness number': witness_num,
-            'victim name': victim_name,
-            'has injury': has_injury,
-            'injury location': injury_location,
-            'selected suspects': suspects
+            'selected suspects': suspects,
+            'culprit name': culprit_name
         }
         
         Save.save_case(case_components)
