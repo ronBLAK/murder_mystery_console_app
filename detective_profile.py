@@ -1,4 +1,4 @@
-from save_case import Save
+from save import Save
 
 class DetectiveProfile:
     # creates a detective profile
