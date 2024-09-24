@@ -1,6 +1,6 @@
 # murder mystery solve game
 import random
-from save_case import Save
+from save import Save
 
 class CaseGen:
     culprit_name_list = ["Jerome", "Max", "Zach", "Tom", "Carl", "Tim", "Cooper", "Shaw", "Mat"] # holds the different possible names for the culprit
