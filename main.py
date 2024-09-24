@@ -1,5 +1,6 @@
 from case_gen import CaseGen
 from detective_profile import DetectiveProfile
+import detective_attributes
 import json
 
 case_data_save_file = 'case data.json' # stores the file name that needs to be opened into a variable
@@ -17,6 +18,10 @@ selected_victim_name = CaseGen.get_victim_name(CaseGen.victim_name_list)
 selected_has_injuries = CaseGen.has_injuries(selected_injury_location)
 selected_suspects_list = CaseGen.get_suspects(selected_culprit_name, CaseGen.culprit_name_list)
 
+# gets and stores all information of detective from save file for detective and assigns it to variables to be used in main.py
+fame = detective_attributes.fame
+cases_solved = detective_attributes.cases_solved
+
 # whether the user accpets or declines the case
 def question_start_solve():
     print('enter 1 to accept case')
@@ -31,6 +36,7 @@ print("you have been transferred to the detective wing of the police department.
 print("")
 
 detective_name = DetectiveProfile.detective_name()
+DetectiveProfile.get_detective_info_as_dict(detective_name, fame, cases_solved)
 print('')
 
 print(f'Hello {detective_name}, you have a case waiting for you.')
