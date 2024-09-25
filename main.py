@@ -66,6 +66,7 @@ while question_start_solve() != '1':
 # this is what happens if the user selects the given case instead of generating a new case
 print('case selected')
 print('opening investigator menu...')
+print('')
 time.sleep(1)
 
 print('the case is all yours, detective...')
