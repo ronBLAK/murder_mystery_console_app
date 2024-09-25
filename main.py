@@ -25,11 +25,24 @@ def commands():
     print('3. view case file')
     print('4. search for clues at the crime scene')
     print('5. open solve and submit menu')
+    print('6. exit')
     print('')
     
-def user_menu_selection():
-    user_selection = input('enter your choice here: ')
-    return user_selection
+def user_menu_interaction(user_choice):
+    if user_choice == '1':
+        print('you can view the profile of your existing detective account in this menu')
+    elif user_choice == '2':
+        print('you can open, read and edit your notebook in this menu')
+    elif user_choice == '3':
+        print('you can review the case file for the case in this menu')
+    elif user_choice == '4':
+        print('you can search for clues in the crime scene in this menu')
+    elif user_choice == '5':
+        print('you can submit who you think is the culprit, with the factual evidence in this menu')
+    elif user_choice == '6':
+        print('exiting...')
+    else:
+        print('invalid input. please try again..')
 
 print("you have been transferred to the detective wing of the police department.")
 print("")
@@ -53,9 +66,18 @@ while question_start_solve() != '1':
 # this is what happens if the user selects the given case instead of generating a new case
 print('case selected')
 print('opening investigator menu...')
-print('')
 time.sleep(1)
 
 print('the case is all yours, detective...')
 commands()
+print('')
 
+while True:
+    user_menu_choice = input('enter your choice here --> ')
+
+    if user_menu_choice == '6':
+        user_menu_interaction(user_menu_choice)
+        break
+    else:
+        user_menu_interaction(user_menu_choice)
+        print('')
