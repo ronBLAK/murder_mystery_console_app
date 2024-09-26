@@ -27,7 +27,8 @@ def commands():
     print('5. open solve and submit menu')
     print('6. exit')
     print('')
-    
+
+# function to store criteria for each action that the detective can carry out while attempting to solve the case
 def user_menu_interaction(user_choice):
     if user_choice == '1':
         print('you can view the profile of your existing detective account in this menu')
@@ -50,11 +51,32 @@ print("")
 # asks the user for their detective name
 detective_name = DetectiveProfile.detective_name()
 
+# checks if the detective name entered is already present in the dictionary
+# if name present in dictionary, does not call the save function, and shows the previously saved name in dictionary. also displays previously saved case, as this is should be the case that is affiliated with the previous detective
 if detective_name == DetectiveProfile.read_detective_info():
     print(f'Hello {detective_name}. Lets pick up your case right where you left it off')
     DetectiveProfile.get_detective_info_as_dict(detective_name, fame, cases_solved,save = False)
     print('')
     print(CaseGen.read_case_file())
+    print('')
+    print('opening investigator menu...')
+    print('')
+    time.sleep(1)
+
+    print('the case is all yours, detective...')
+    commands()
+    print('')
+
+    while True:
+        user_menu_choice = input('enter your choice here --> ')
+
+        if user_menu_choice == '6':
+            user_menu_interaction(user_menu_choice)
+            break
+        else:
+            user_menu_interaction(user_menu_choice)
+            print('')
+# if not present in dictionary, proceeds to save the new detective info into dictionary, and generates a new case
 else:
     DetectiveProfile.get_detective_info_as_dict(detective_name, fame, cases_solved)
     print('')
