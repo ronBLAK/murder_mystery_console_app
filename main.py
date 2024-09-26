@@ -49,36 +49,43 @@ print("")
 
 # asks the user for their detective name
 detective_name = DetectiveProfile.detective_name()
-DetectiveProfile.get_detective_info_as_dict(detective_name, fame, cases_solved)
-print('')
 
-print(f'Hello {detective_name}, you have a case waiting for you.')
-print('')
+if detective_name == DetectiveProfile.read_detective_info():
+    print(f'Hello {detective_name}. Lets pick up your case right where you left it off')
+    DetectiveProfile.get_detective_info_as_dict(detective_name, fame, cases_solved,save = False)
+    print('')
+    print(CaseGen.read_case_file())
+else:
+    DetectiveProfile.get_detective_info_as_dict(detective_name, fame, cases_solved)
+    print('')
 
-# generates random case, and random case file according to information from the case
-CaseGen.generate_case_and_case_file_random()
+    print(f'Hello {detective_name}, you have a case waiting for you.')
+    print('')
 
-# checks and validates the input
-while question_start_solve() != '1':
-    print('New Case:')
+    # generates random case, and random case file according to information from the case
     CaseGen.generate_case_and_case_file_random()
 
-# this is what happens if the user selects the given case instead of generating a new case
-print('case selected')
-print('opening investigator menu...')
-print('')
-time.sleep(1)
+    # checks and validates the input
+    while question_start_solve() != '1':
+        print('New Case:')
+        CaseGen.generate_case_and_case_file_random()
 
-print('the case is all yours, detective...')
-commands()
-print('')
+    # this is what happens if the user selects the given case instead of generating a new case
+    print('case selected')
+    print('opening investigator menu...')
+    print('')
+    time.sleep(1)
 
-while True:
-    user_menu_choice = input('enter your choice here --> ')
+    print('the case is all yours, detective...')
+    commands()
+    print('')
 
-    if user_menu_choice == '6':
-        user_menu_interaction(user_menu_choice)
-        break
-    else:
-        user_menu_interaction(user_menu_choice)
-        print('')
+    while True:
+        user_menu_choice = input('enter your choice here --> ')
+
+        if user_menu_choice == '6':
+            user_menu_interaction(user_menu_choice)
+            break
+        else:
+            user_menu_interaction(user_menu_choice)
+            print('')
