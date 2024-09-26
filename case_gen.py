@@ -29,7 +29,7 @@ class CaseGen:
 
     # generates a random case with random components passed into the case function. this is stored in a json file for comparison with the detective's criminal
     @staticmethod
-    def generate_case(culprit_name, murder_weapon, murder_location, murder_type, weather, time_of_day, is_witness_present, witness_num, victim_name, has_injury, injury_location, suspects):
+    def generate_case(culprit_name, murder_weapon, murder_location, murder_type, weather, time_of_day, is_witness_present, witness_num, victim_name, has_injury, injury_location, suspects, save = True):
         # holds all the values that need to be save to the newly created, locked json file
         case_components = {
             'victim name': victim_name,
@@ -46,20 +46,29 @@ class CaseGen:
             'culprit name': culprit_name
         }
         
-        Save.save_case(case_components)
+        if save:
+            Save.save_case(case_components)
         return case_components
     
     # generates a case file from the same content of the case method. this is the story version that the detective sees
     @staticmethod
-    def generate_case_file(victim_name, murder_weapon, has_injury, injury_location, murder_location, murder_type, weather, time_of_day, witness_num, num_suspects, suspects):
+    def generate_case_file(victim_name, murder_weapon, has_injury, injury_location, murder_location, murder_type, weather, time_of_day, witness_num, num_suspects, suspects, save = True):
         if has_injury == True:
             case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas a {murder_weapon} {murder_type} wound on the {injury_location}. It was\na {weather} {time_of_day}, and there is {witness_num} witnesses to this\ncrime. There are {len(num_suspects)} suspects to this crime. They are\n{suspects}'
         else:
             case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas {murder_type}ing. There were no injuries on the body according\nto autopsy reports. It was a {weather} {time_of_day} and\nthere is {witness_num} witnesses to this crime. There are {len(num_suspects)} suspects\nto this crime. They are {suspects}'
         
-        Save.save_case_file(case_file)
+        if save:
+            Save.save_case_file(case_file)
+            
         print(case_file)
         return case_file
+    
+    def read_case_file():
+        with open('case file.json', 'r') as json_file:
+            case_file_data = json.load(json_file)
+            
+        return case_file_data
 
     # determines the name of the culprit
     def get_culprit_name(possible_culprit_names):
