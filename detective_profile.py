@@ -21,6 +21,7 @@ class DetectiveProfile:
             Save.save_detective(detective_info)
         return detective_info
     
+    # reads all information from detective save file and returns the detective name saved back to the methos
     def read_detective_info():
         with open('detective data.json', 'r') as json_file:
             detective_data = json.load(json_file)
