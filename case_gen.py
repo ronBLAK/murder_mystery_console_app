@@ -46,8 +46,10 @@ class CaseGen:
             'culprit name': culprit_name
         }
         
+        # checks if the save bool passed into the method when called is true or false, and if true, proceeds to save the informa
         if save:
             Save.save_case(case_components)
+            
         return case_components
     
     # generates a case file from the same content of the case method. this is the story version that the detective sees
@@ -58,6 +60,7 @@ class CaseGen:
         else:
             case_file = f'{victim_name} was found dead in a {murder_location}. The cause of death\nwas {murder_type}ing. There were no injuries on the body according\nto autopsy reports. It was a {weather} {time_of_day} and\nthere is {witness_num} witnesses to this crime. There are {len(num_suspects)} suspects\nto this crime. They are {suspects}'
         
+        # checks if the save bool passed into the method when called is true or false, and if true, proceeds to save the information
         if save:
             Save.save_case_file(case_file)
             
@@ -163,7 +166,8 @@ class CaseGen:
                 
         # print(culprit_index_in_suspects_list)
         return selected_suspects
-    
+
+    # calls all the methods that work together to show the detective the case that they are dealing with
     def generate_case_and_case_file_random():
         case_data_save_file = 'case data.json' # stores the file name that needs to be opened into a variable
         
