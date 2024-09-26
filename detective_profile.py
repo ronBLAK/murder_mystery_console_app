@@ -10,13 +10,21 @@ class DetectiveProfile:
         
         return "Detective " + formatted_name
     
-    def get_detective_info_as_dict(detective_name, fame, cases_solved):
+    def get_detective_info_as_dict(detective_name, fame, cases_solved, save = True):
         detective_info = {
             'detective name': detective_name,
             'fame': fame,
             'cases solved': cases_solved
         }
         
-        Save.save_detective(detective_info)
+        if save:
+            Save.save_detective(detective_info)
         return detective_info
+    
+    def read_detective_info():
+        with open('detective data.json', 'r') as json_file:
+            detective_data = json.load(json_file)
+            
+        detective_name = detective_data.get('detective name')
+        return detective_name
         # need to add more variables that define the detective as the parameters for this function..
