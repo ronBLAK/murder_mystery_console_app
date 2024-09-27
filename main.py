@@ -1,5 +1,6 @@
 from case_gen import CaseGen
 from detective_profile import DetectiveProfile
+from suspect_information import SuspectInformation
 import detective_attributes
 import time
 import os
@@ -33,11 +34,24 @@ def commands():
     print('5. open solve and submit menu')
     print('6. exit')
     print('')
+    
+print("you have been transferred to the detective wing of the police department.")
+print("")
+print("--- enter any name other that the name of the previous detective's name to start a new account ---")
+
+# asks the user for their detective name
+detective_name = DetectiveProfile.detective_name()
+print('')
 
 # defines all actions available to detective in inverstigator menu, and their criteria
 def user_menu_interaction(user_choice):
     if user_choice == '1':
-        print('you can view the profile of your existing detective account in this menu')
+        print('')
+        print('Detective Profile:')
+        print('')
+        print(f'Detective Name: {detective_name}')
+        print(f'Detective Fame: {fame}')
+        print(f'Number of Cases Solved: {cases_solved}')
     elif user_choice == '2':
         print('you can open, read and edit your notebook in this menu')
     elif user_choice == '3':
@@ -47,16 +61,23 @@ def user_menu_interaction(user_choice):
     elif user_choice == '5':
         print('you can submit who you think is the culprit, with the factual evidence in this menu')
     elif user_choice == '6':
-        print('exiting...')
+        print('u can view all the suspects profiles here')
+        print('')
+        print(SuspectInformation.generate_suspect_1_report(SuspectInformation.suspects_list))
+        print('')
+        print(SuspectInformation.generate_suspect_2_report(SuspectInformation.suspects_list))
+        print('')
+        print(SuspectInformation.generate_suspect_3_report(SuspectInformation.suspects_list))
+        print('')
+        print(SuspectInformation.generate_suspect_4_report(SuspectInformation.suspects_list))
+        print('')
+        print(SuspectInformation.generate_suspect_5_report(SuspectInformation.suspects_list))
+    elif user_choice == '7':
+        print('')
+        print('--- Detective information and current case successfully saved---')
+        print('--- Please remember the name of your detective account to revisit case---')
     else:
         print('invalid input. please try again..')
-
-print("you have been transferred to the detective wing of the police department.")
-print("")
-
-# asks the user for their detective name
-detective_name = DetectiveProfile.detective_name()
-print('')
 
 if os.path.exists(case_file) and os.path.exists(case_data) and os.path.exists(detective_data):
     if detective_name == DetectiveProfile.read_detective_info():
@@ -75,17 +96,20 @@ if os.path.exists(case_file) and os.path.exists(case_data) and os.path.exists(de
         while True:
             user_menu_choice = input('enter your choice here --> ')
 
-            if user_menu_choice == '6':
+            if user_menu_choice == '7':
                 user_menu_interaction(user_menu_choice)
                 break
             else:
                 user_menu_interaction(user_menu_choice)
                 print('')
     else:
+        fame = 0
+        cases_solved = 0
+        
         DetectiveProfile.get_detective_info_as_dict(detective_name, fame, cases_solved)
         print('')
 
-        print(f'Hello {detective_name}, you have a case waiting for you.')
+        print(f'Hello {detective_name}. I am Trevor, your in-charge. You seem new to this\nfield. Lets see what you got. You have a new case waiting for you.')
         print('')
 
         # generates random case, and random case file according to information from the case
@@ -109,17 +133,20 @@ if os.path.exists(case_file) and os.path.exists(case_data) and os.path.exists(de
         while True:
             user_menu_choice = input('enter your choice here --> ')
 
-            if user_menu_choice == '6':
+            if user_menu_choice == '7':
                 user_menu_interaction(user_menu_choice)
                 break
             else:
                 user_menu_interaction(user_menu_choice)
                 print('')
 else:
+    fame = 0
+    cases_solved = 0
+    
     DetectiveProfile.get_detective_info_as_dict(detective_name, fame, cases_solved)
     print('')
 
-    print(f'Hello {detective_name}, you have a case waiting for you.')
+    print(f'Hello {detective_name}. I am Trevor, your in-charge. You seem new to this\nfield. Lets see what you got. You have a new case waiting for you.')
     print('')
 
     # generates random case, and random case file according to information from the case
@@ -143,7 +170,7 @@ else:
     while True:
         user_menu_choice = input('enter your choice here --> ')
 
-        if user_menu_choice == '6':
+        if user_menu_choice == '7':
             user_menu_interaction(user_menu_choice)
             break
         else:
