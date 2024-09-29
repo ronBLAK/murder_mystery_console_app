@@ -1,27 +1,36 @@
+import json
+import time
+import os
 from case_gen import CaseGen
 from detective_profile import DetectiveProfile
 from suspect_information import SuspectInformation
 import detective_attributes
-import time
-import os
 
 # gets and stores all information of detective from save file for detective and assigns it to variables to be used in main.py
 fame = detective_attributes.fame
 cases_solved = detective_attributes.cases_solved
 
-# stores the names of different save file into variables
-case_data = 'case data.json'
-case_file = 'case file.json'
-detective_data = 'detective data.json'
+# stores the names of different save files into variables
+case_data_file_path = 'case data.json'
+case_file_file_path = 'case file.json'
+detective_data_file_path = 'detective data.json'
 
-# whether the user accpets or declines the case
+# Initial loading of case data and suspect list
+def reload_case_data():
+    global case_data, suspects_list
+    with open(case_data_file_path, 'r') as json_file:
+        case_data = json.load(json_file)
+    suspects_list = case_data.get('selected suspects')
+
+reload_case_data()  # Initial load of case data
+
+# whether the user accepts or declines the case
 def question_start_solve():
     print('enter 1 to accept case')
     print('enter 2 to decline and request new case')
     print('')
     start_solve = input('enter your choice here --> ')
     print('')
-
     return start_solve
 
 # function to display the commands that the user can choose
@@ -32,18 +41,19 @@ def commands():
     print('3. view case file')
     print('4. search for clues at the crime scene')
     print('5. open solve and submit menu')
-    print('6. exit')
+    print('6. view suspect information')
+    print('7. exit')
     print('')
-    
+
 print("you have been transferred to the detective wing of the police department.")
 print("")
-print("--- enter any name other that the name of the previous detective's name to start a new account ---")
+print("--- enter any name other than the name of the previous detective's name to start a new account ---")
 
 # asks the user for their detective name
 detective_name = DetectiveProfile.detective_name()
 print('')
 
-# defines all actions available to detective in inverstigator menu, and their criteria
+# defines all actions available to detective in investigator menu, and their criteria
 def user_menu_interaction(user_choice):
     if user_choice == '1':
         print('')
@@ -61,41 +71,38 @@ def user_menu_interaction(user_choice):
     elif user_choice == '5':
         print('you can submit who you think is the culprit, with the factual evidence in this menu')
     elif user_choice == '6':
-        print('u can view all the suspects profiles here')
+        reload_case_data()  # Reload case data before showing suspects
+        print('You can view all the suspects profiles here')
         print('')
-        print(SuspectInformation.generate_suspect_1_report(SuspectInformation.suspects_list))
-        print('')
-        print(SuspectInformation.generate_suspect_2_report(SuspectInformation.suspects_list))
-        print('')
-        print(SuspectInformation.generate_suspect_3_report(SuspectInformation.suspects_list))
-        print('')
-        print(SuspectInformation.generate_suspect_4_report(SuspectInformation.suspects_list))
-        print('')
-        print(SuspectInformation.generate_suspect_5_report(SuspectInformation.suspects_list))
+        
+        # displays generated report for each of the suspects in suspects list
+        for i, suspect in enumerate(suspects_list):
+            print(SuspectInformation.generate_suspect_1_report(suspect))
+            print('')
     elif user_choice == '7':
         print('')
         print('--- Detective information and current case successfully saved---')
-        print('--- Please remember the name of your detective account to revisit case---')
+        print('--- Please remember the name of your detective account to revisit the case---')
     else:
         print('invalid input. please try again..')
 
-if os.path.exists(case_file) and os.path.exists(case_data) and os.path.exists(detective_data):
+# The main flow of the game based on whether the save files exist
+if os.path.exists(case_file_file_path) and os.path.exists(case_data_file_path) and os.path.exists(detective_data_file_path):
     if detective_name == DetectiveProfile.read_detective_info():
-        print(f'hello {detective_name}. Lets pick up your case right where you left it off.')
+        print(f'Hello {detective_name}. Let\'s pick up your case right where you left it off.')
         print('')
         print(CaseGen.read_case_file())
         print('')
-        print('opening investigator menu...')
+        print('Opening investigator menu...')
         print('')
         time.sleep(1)
 
-        print('the case is all yours, detective...')
+        print('The case is all yours, detective...')
         commands()
         print('')
 
         while True:
-            user_menu_choice = input('enter your choice here --> ')
-
+            user_menu_choice = input('Enter your choice here --> ')
             if user_menu_choice == '7':
                 user_menu_interaction(user_menu_choice)
                 break
@@ -105,34 +112,35 @@ if os.path.exists(case_file) and os.path.exists(case_data) and os.path.exists(de
     else:
         fame = 0
         cases_solved = 0
-        
+
         DetectiveProfile.get_detective_info_as_dict(detective_name, fame, cases_solved)
         print('')
 
-        print(f'Hello {detective_name}. I am Trevor, your in-charge. You seem new to this\nfield. Lets see what you got. You have a new case waiting for you.')
+        print(f'Hello {detective_name}. I am Trevor, your in-charge. You seem new to this\nfield. Let\'s see what you\'ve got. You have a new case waiting for you.')
         print('')
 
-        # generates random case, and random case file according to information from the case
+        # Generates random case, and random case file according to information from the case
         CaseGen.generate_case_and_case_file_random()
+        reload_case_data()  # Reload after generating a new case
 
-        # checks and validates the input
+        # Checks and validates the input
         while question_start_solve() != '1':
             print('New Case:')
             CaseGen.generate_case_and_case_file_random()
+            reload_case_data()  # Reload after generating a new case
 
-        # this is what happens if the user selects the given case instead of generating a new case
-        print('case selected')
-        print('opening investigator menu...')
+        # This is what happens if the user selects the given case instead of generating a new case
+        print('Case selected')
+        print('Opening investigator menu...')
         print('')
         time.sleep(1)
 
-        print('the case is all yours, detective...')
+        print('The case is all yours, detective...')
         commands()
         print('')
 
         while True:
-            user_menu_choice = input('enter your choice here --> ')
-
+            user_menu_choice = input('Enter your choice here --> ')
             if user_menu_choice == '7':
                 user_menu_interaction(user_menu_choice)
                 break
@@ -142,34 +150,35 @@ if os.path.exists(case_file) and os.path.exists(case_data) and os.path.exists(de
 else:
     fame = 0
     cases_solved = 0
-    
+
     DetectiveProfile.get_detective_info_as_dict(detective_name, fame, cases_solved)
     print('')
 
-    print(f'Hello {detective_name}. I am Trevor, your in-charge. You seem new to this\nfield. Lets see what you got. You have a new case waiting for you.')
+    print(f'Hello {detective_name}. I am Trevor, your in-charge. You seem new to this\nfield. Let\'s see what you\'ve got. You have a new case waiting for you.')
     print('')
 
-    # generates random case, and random case file according to information from the case
+    # Generates random case, and random case file according to information from the case
     CaseGen.generate_case_and_case_file_random()
+    reload_case_data()  # Reload after generating a new case
 
-    # checks and validates the input
+    # Checks and validates the input
     while question_start_solve() != '1':
         print('New Case:')
         CaseGen.generate_case_and_case_file_random()
+        reload_case_data()  # Reload after generating a new case
 
-    # this is what happens if the user selects the given case instead of generating a new case
-    print('case selected')
-    print('opening investigator menu...')
+    # This is what happens if the user selects the given case instead of generating a new case
+    print('Case selected')
+    print('Opening investigator menu...')
     print('')
     time.sleep(1)
 
-    print('the case is all yours, detective...')
+    print('The case is all yours, detective...')
     commands()
     print('')
 
     while True:
-        user_menu_choice = input('enter your choice here --> ')
-
+        user_menu_choice = input('Enter your choice here --> ')
         if user_menu_choice == '7':
             user_menu_interaction(user_menu_choice)
             break
