@@ -193,6 +193,7 @@ class CaseGen:
         with open(case_data_save_file, 'r') as json_file:
             case_data = json.load(json_file)
 
+        # pulls saved data from case data.json
         pulled_culprit_name = case_data.get('culprit name')
         pulled_murder_weapon = case_data.get('murder weapon')
         pulled_murder_location = case_data.get('murder location')
