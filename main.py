@@ -1,4 +1,3 @@
-import json
 import time
 import os
 from case_gen import CaseGen
@@ -14,15 +13,13 @@ cases_solved = detective_attributes.cases_solved
 case_data_file_path = 'case data.json'
 case_file_file_path = 'case file.json'
 detective_data_file_path = 'detective data.json'
+suspects_info_file_path = 'suspects info.json'
 
-# Initial loading of case data and suspect list
-def reload_case_data():
-    global case_data, suspects_list
-    with open(case_data_file_path, 'r') as json_file:
-        case_data = json.load(json_file)
-    suspects_list = case_data.get('selected suspects')
-
-reload_case_data()  # Initial load of case data
+suspect_1_file_path = 'suspects 1 information file.json'
+suspect_2_file_path = 'suspects 2 information file.json'
+suspect_3_file_path = 'suspects 3 information file.json'
+suspect_4_file_path = 'suspects 4 information file.json'
+suspect_5_file_path = 'suspects 5 information file.json'
 
 # whether the user accepts or declines the case
 def question_start_solve():
@@ -71,14 +68,42 @@ def user_menu_interaction(user_choice):
     elif user_choice == '5':
         print('you can submit who you think is the culprit, with the factual evidence in this menu')
     elif user_choice == '6':
-        reload_case_data()  # Reload case data before showing suspects
         print('You can view all the suspects profiles here')
+        SuspectInformation.generate_all_suspects_information()
+    elif user_choice == '7':
         print('')
+        print('--- Detective information and current case successfully saved---')
+        print('--- Please remember the name of your detective account to revisit the case---')
+    else:
+        print('invalid input. please try again..')
         
-        # displays generated report for each of the suspects in suspects list
-        for i, suspect in enumerate(suspects_list):
-            print(SuspectInformation.generate_suspect_1_report(suspect))
-            print('')
+def user_menu_interaction_with_read(user_choice):
+    if user_choice == '1':
+        print('')
+        print('Detective Profile:')
+        print('')
+        print(f'Detective Name: {detective_name}')
+        print(f'Detective Fame: {fame}')
+        print(f'Number of Cases Solved: {cases_solved}')
+    elif user_choice == '2':
+        print('you can open, read and edit your notebook in this menu')
+    elif user_choice == '3':
+        print('you can review the case file for the case in this menu')
+    elif user_choice == '4':
+        print('you can search for clues in the crime scene in this menu')
+    elif user_choice == '5':
+        print('you can submit who you think is the culprit, with the factual evidence in this menu')
+    elif user_choice == '6':
+        print('You can view all the suspects profiles here')
+        print(SuspectInformation.read_suspect_1_report())
+        print('')
+        print(SuspectInformation.read_suspect_2_report())
+        print('')
+        print(SuspectInformation.read_suspect_3_report())
+        print('')
+        print(SuspectInformation.read_suspect_4_report())
+        print('')
+        print(SuspectInformation.read_suspect_5_report())
     elif user_choice == '7':
         print('')
         print('--- Detective information and current case successfully saved---')
@@ -87,7 +112,7 @@ def user_menu_interaction(user_choice):
         print('invalid input. please try again..')
 
 # The main flow of the game based on whether the save files exist
-if os.path.exists(case_file_file_path) and os.path.exists(case_data_file_path) and os.path.exists(detective_data_file_path):
+if os.path.exists(case_file_file_path) and os.path.exists(case_data_file_path) and os.path.exists(detective_data_file_path) and os.path.exists(suspects_info_file_path) and os.path.exists(suspect_1_file_path) and os.path.exists(suspect_2_file_path) and os.path.exists(suspect_3_file_path) and os.path.exists(suspect_4_file_path) and os.path.exists(suspect_5_file_path):
     if detective_name == DetectiveProfile.read_detective_info():
         print(f'Hello {detective_name}. Let\'s pick up your case right where you left it off.')
         print('')
@@ -104,10 +129,10 @@ if os.path.exists(case_file_file_path) and os.path.exists(case_data_file_path) a
         while True:
             user_menu_choice = input('Enter your choice here --> ')
             if user_menu_choice == '7':
-                user_menu_interaction(user_menu_choice)
+                user_menu_interaction_with_read(user_menu_choice)
                 break
             else:
-                user_menu_interaction(user_menu_choice)
+                user_menu_interaction_with_read(user_menu_choice)
                 print('')
     else:
         fame = 0
@@ -121,13 +146,11 @@ if os.path.exists(case_file_file_path) and os.path.exists(case_data_file_path) a
 
         # Generates random case, and random case file according to information from the case
         CaseGen.generate_case_and_case_file_random()
-        reload_case_data()  # Reload after generating a new case
 
         # Checks and validates the input
         while question_start_solve() != '1':
             print('New Case:')
             CaseGen.generate_case_and_case_file_random()
-            reload_case_data()  # Reload after generating a new case
 
         # This is what happens if the user selects the given case instead of generating a new case
         print('Case selected')
@@ -159,13 +182,11 @@ else:
 
     # Generates random case, and random case file according to information from the case
     CaseGen.generate_case_and_case_file_random()
-    reload_case_data()  # Reload after generating a new case
 
     # Checks and validates the input
     while question_start_solve() != '1':
         print('New Case:')
         CaseGen.generate_case_and_case_file_random()
-        reload_case_data()  # Reload after generating a new case
 
     # This is what happens if the user selects the given case instead of generating a new case
     print('Case selected')
