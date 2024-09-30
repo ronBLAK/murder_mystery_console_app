@@ -19,47 +19,47 @@ class SuspectInformation:
     }
     
     # following function generate values for reports for each of the 5 suspects in the suspects list
-    def generate_suspect_report_values(suspect_1_name, suspect_2_name, suspect_3_name, suspect_4_name, suspect_5_name, hair_color, height_type, blood_type, eye_color, ethnicity, skin_color, save = True):
+    def generate_suspect_report_values(suspect_1_name, suspect_2_name, suspect_3_name, suspect_4_name, suspect_5_name, hair_color_1, hair_color_2, hair_color_3, hair_color_4, hair_color_5, height_type_1, height_type_2, height_type_3, height_type_4, height_type_5, blood_type_1, blood_type_2, blood_type_3, blood_type_4, blood_type_5, eye_color_1, eye_color_2, eye_color_3, eye_color_4, eye_color_5, ethnicity_1, ethnicity_2, ethnicity_3, ethnicity_4, ethnicity_5, skin_color_1, skin_color_2, skin_color_3, skin_color_4, skin_color_5, save = True):
         suspect_components = {
             'suspect 1 name': suspect_1_name,
-            'hair 1': hair_color,
-            'height type 1': height_type,
-            'blood type 1': blood_type,
-            'skin color 1': skin_color,
-            'eye color 1': eye_color,
-            'ethnicity 1': ethnicity,
+            'hair 1': hair_color_1,
+            'height type 1': height_type_1,
+            'blood type 1': blood_type_1,
+            'skin color 1': skin_color_1,
+            'eye color 1': eye_color_1,
+            'ethnicity 1': ethnicity_1,
             
             'suspect 2 name': suspect_2_name,
-            'hair 2': hair_color,
-            'height type 2': height_type,
-            'blood type 2': blood_type,
-            'skin color 2': skin_color,
-            'eye color 2': eye_color,
-            'ethnicity 2': ethnicity,
+            'hair 2': hair_color_2,
+            'height type 2': height_type_2,
+            'blood type 2': blood_type_2,
+            'skin color 2': skin_color_2,
+            'eye color 2': eye_color_2,
+            'ethnicity 2': ethnicity_2,
             
             'suspect 3 name': suspect_3_name,
-            'hair 3': hair_color,
-            'height type 3': height_type,
-            'blood type 3': blood_type,
-            'skin color 3': skin_color,
-            'eye color 3': eye_color,
-            'ethnicity 3': ethnicity,
+            'hair 3': hair_color_3,
+            'height type 3': height_type_3,
+            'blood type 3': blood_type_3,
+            'skin color 3': skin_color_3,
+            'eye color 3': eye_color_3,
+            'ethnicity 3': ethnicity_3,
             
             'suspect 4 name': suspect_4_name,
-            'hair 4': hair_color,
-            'height type 4': height_type,
-            'blood type 4': blood_type,
-            'skin color 4': skin_color,
-            'eye color 4': eye_color,
-            'ethnicity 4': ethnicity,
+            'hair 4': hair_color_4,
+            'height type 4': height_type_4,
+            'blood type 4': blood_type_4,
+            'skin color 4': skin_color_4,
+            'eye color 4': eye_color_4,
+            'ethnicity 4': ethnicity_4,
             
             'suspect 5 name': suspect_5_name,
-            'hair 5': hair_color,
-            'height type 5': height_type,
-            'blood type 5': blood_type,
-            'skin color 5': skin_color,
-            'eye colo 5': eye_color,
-            'ethnicity 5': ethnicity,
+            'hair 5': hair_color_5,
+            'height type 5': height_type_5,
+            'blood type 5': blood_type_5,
+            'skin color 5': skin_color_5,
+            'eye color 5': eye_color_5,
+            'ethnicity 5': ethnicity_5,
         }
         
         if save:
@@ -77,6 +77,12 @@ class SuspectInformation:
         print(suspect_1_report)
         return suspect_1_report
     
+    def read_suspect_1_report():
+        with open('suspects 1 information file.json', 'r') as json_file:
+            suspect_1_report_data = json.load(json_file)
+          
+        return suspect_1_report_data
+    
     def generate_suspect_2_report(suspect_2, hair_color, height_type, blood_type, eye_color, ethnicity, skin_color, save = True):
         suspect_2_report = f'{suspect_2} is a {hair_color} haired {height_type} individual\nwith a {blood_type} blood group. Suspect is {skin_color} toned, with {eye_color} eyes and is {ethnicity}'
         
@@ -85,6 +91,12 @@ class SuspectInformation:
         
         print(suspect_2_report)
         return suspect_2_report
+    
+    def read_suspect_2_report():
+        with open('suspects 2 information file.json', 'r') as json_file:
+            suspect_2_report_data = json.load(json_file)
+          
+        return suspect_2_report_data
     
     def generate_suspect_3_report(suspect_3, hair_color, height_type, blood_type, eye_color, ethnicity, skin_color, save = True):
         suspect_3_report = f'{suspect_3} is a {hair_color} haired {height_type} individual\nwith a {blood_type} blood group. Suspect is {skin_color} toned, with {eye_color} eyes and is {ethnicity}'
@@ -95,6 +107,12 @@ class SuspectInformation:
         print(suspect_3_report)
         return suspect_3_report
     
+    def read_suspect_3_report():
+        with open('suspects 3 information file.json', 'r') as json_file:
+            suspect_3_report_data = json.load(json_file)
+          
+        return suspect_3_report_data
+    
     def generate_suspect_4_report(suspect_4, hair_color, height_type, blood_type, eye_color, ethnicity, skin_color, save = True):
         suspect_4_report = f'{suspect_4} is a {hair_color} haired {height_type} individual\nwith a {blood_type} blood group. Suspect is {skin_color} toned, with {eye_color} eyes and is {ethnicity}'
         
@@ -104,6 +122,12 @@ class SuspectInformation:
         print(suspect_4_report)
         return suspect_4_report
     
+    def read_suspect_4_report():
+        with open('suspects 4 information file.json', 'r') as json_file:
+            suspect_4_report_data = json.load(json_file)
+  
+        return suspect_4_report_data
+    
     def generate_suspect_5_report(suspect_5, hair_color, height_type, blood_type, eye_color, ethnicity, skin_color, save = True):
         suspect_5_report = f'{suspect_5} is a {hair_color} haired {height_type} individual\nwith a {blood_type} blood group. Suspect is {skin_color} toned, with {eye_color} eyes and is {ethnicity}'
         
@@ -112,6 +136,12 @@ class SuspectInformation:
         
         print(suspect_5_report)
         return suspect_5_report
+    
+    def read_suspect_5_report():
+        with open('suspects 5 information file.json', 'r') as json_file:
+            suspect_5_report_data = json.load(json_file)
+         
+        return suspect_5_report_data
     
     
     # generates the different features of the suspects to be passed into the generate suspect report methods
@@ -158,14 +188,47 @@ class SuspectInformation:
             
         suspect_list = case_data.get('selected suspects')
         
-        selected_hair_color = SuspectInformation.get_hair_color(SuspectInformation.suspect_hair_color_list)
-        selected_height_type = SuspectInformation.get_height_type(SuspectInformation.suspect_height_type_list)
-        selected_blood_type = SuspectInformation.get_blood_type(SuspectInformation.suspect_blood_type_list)
-        selected_eye_color = SuspectInformation.get_eye_color(SuspectInformation.suspect_eye_color_list)
-        selected_ethnicity = SuspectInformation.get_suspect_ethnicity(SuspectInformation.suspect_ethnicity_list)
-        selected_skin_color = SuspectInformation.suspect_skin_color(selected_ethnicity, SuspectInformation.suspect_skin_color_dict)
+        # suspect 1
+        selected_hair_color_1 = SuspectInformation.get_hair_color(SuspectInformation.suspect_hair_color_list)
+        selected_height_type_1 = SuspectInformation.get_height_type(SuspectInformation.suspect_height_type_list)
+        selected_blood_type_1 = SuspectInformation.get_blood_type(SuspectInformation.suspect_blood_type_list)
+        selected_eye_color_1 = SuspectInformation.get_eye_color(SuspectInformation.suspect_eye_color_list)
+        selected_ethnicity_1 = SuspectInformation.get_suspect_ethnicity(SuspectInformation.suspect_ethnicity_list)
+        selected_skin_color_1 = SuspectInformation.suspect_skin_color(selected_ethnicity_1, SuspectInformation.suspect_skin_color_dict)
         
-        SuspectInformation.generate_suspect_report_values(suspect_list[0], suspect_list[1], suspect_list[2], suspect_list[3], suspect_list[4], selected_hair_color, selected_height_type, selected_blood_type, selected_eye_color, selected_ethnicity, selected_skin_color)
+        # suspect 2
+        selected_hair_color_2 = SuspectInformation.get_hair_color(SuspectInformation.suspect_hair_color_list)
+        selected_height_type_2 = SuspectInformation.get_height_type(SuspectInformation.suspect_height_type_list)
+        selected_blood_type_2 = SuspectInformation.get_blood_type(SuspectInformation.suspect_blood_type_list)
+        selected_eye_color_2 = SuspectInformation.get_eye_color(SuspectInformation.suspect_eye_color_list)
+        selected_ethnicity_2 = SuspectInformation.get_suspect_ethnicity(SuspectInformation.suspect_ethnicity_list)
+        selected_skin_color_2 = SuspectInformation.suspect_skin_color(selected_ethnicity_2, SuspectInformation.suspect_skin_color_dict)
+        
+        # suspect 3
+        selected_hair_color_3 = SuspectInformation.get_hair_color(SuspectInformation.suspect_hair_color_list)
+        selected_height_type_3 = SuspectInformation.get_height_type(SuspectInformation.suspect_height_type_list)
+        selected_blood_type_3 = SuspectInformation.get_blood_type(SuspectInformation.suspect_blood_type_list)
+        selected_eye_color_3 = SuspectInformation.get_eye_color(SuspectInformation.suspect_eye_color_list)
+        selected_ethnicity_3 = SuspectInformation.get_suspect_ethnicity(SuspectInformation.suspect_ethnicity_list)
+        selected_skin_color_3 = SuspectInformation.suspect_skin_color(selected_ethnicity_3, SuspectInformation.suspect_skin_color_dict)
+        
+        # suspect 4
+        selected_hair_color_4 = SuspectInformation.get_hair_color(SuspectInformation.suspect_hair_color_list)
+        selected_height_type_4 = SuspectInformation.get_height_type(SuspectInformation.suspect_height_type_list)
+        selected_blood_type_4 = SuspectInformation.get_blood_type(SuspectInformation.suspect_blood_type_list)
+        selected_eye_color_4 = SuspectInformation.get_eye_color(SuspectInformation.suspect_eye_color_list)
+        selected_ethnicity_4 = SuspectInformation.get_suspect_ethnicity(SuspectInformation.suspect_ethnicity_list)
+        selected_skin_color_4 = SuspectInformation.suspect_skin_color(selected_ethnicity_4, SuspectInformation.suspect_skin_color_dict)
+        
+        # suspect 5
+        selected_hair_color_5 = SuspectInformation.get_hair_color(SuspectInformation.suspect_hair_color_list)
+        selected_height_type_5 = SuspectInformation.get_height_type(SuspectInformation.suspect_height_type_list)
+        selected_blood_type_5 = SuspectInformation.get_blood_type(SuspectInformation.suspect_blood_type_list)
+        selected_eye_color_5 = SuspectInformation.get_eye_color(SuspectInformation.suspect_eye_color_list)
+        selected_ethnicity_5 = SuspectInformation.get_suspect_ethnicity(SuspectInformation.suspect_ethnicity_list)
+        selected_skin_color_5 = SuspectInformation.suspect_skin_color(selected_ethnicity_5, SuspectInformation.suspect_skin_color_dict)
+        
+        SuspectInformation.generate_suspect_report_values(suspect_list[0], suspect_list[1], suspect_list[2], suspect_list[3], suspect_list[4], selected_hair_color_1, selected_hair_color_2, selected_hair_color_3, selected_hair_color_4, selected_hair_color_5, selected_height_type_1, selected_height_type_2, selected_height_type_3, selected_height_type_4, selected_height_type_5, selected_blood_type_1, selected_blood_type_2, selected_blood_type_3, selected_blood_type_4, selected_blood_type_5, selected_eye_color_1, selected_eye_color_2, selected_eye_color_3, selected_eye_color_4, selected_eye_color_5, selected_ethnicity_1, selected_ethnicity_2, selected_ethnicity_3, selected_ethnicity_4, selected_ethnicity_5, selected_skin_color_1, selected_skin_color_2, selected_skin_color_3, selected_skin_color_4, selected_skin_color_5)
         
         with open(suspects_report_values_file, 'r') as json_file:
             suspects_info = json.load(json_file)
