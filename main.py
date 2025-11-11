@@ -4,6 +4,7 @@ from case_gen import CaseGen
 from detective_profile import DetectiveProfile
 from suspect_information import SuspectInformation
 import detective_attributes
+import notebook
 
 # gets and stores all information of detective from save file for detective and assigns it to variables to be used in main.py
 fame = detective_attributes.fame
@@ -21,8 +22,11 @@ suspect_3_file_path = 'suspects 3 information file.json'
 suspect_4_file_path = 'suspects 4 information file.json'
 suspect_5_file_path = 'suspects 5 information file.json'
 
+suspect_generated = False
+
 # whether the user accepts or declines the case
 def question_start_solve():
+    print('')
     print('enter 1 to accept case')
     print('enter 2 to decline and request new case')
     print('')
@@ -59,23 +63,47 @@ def user_menu_interaction(user_choice):
         print(f'Detective Name: {detective_name}')
         print(f'Detective Fame: {fame}')
         print(f'Number of Cases Solved: {cases_solved}')
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '2':
-        print('you can open, read and edit your notebook in this menu')
+        print('this feature is still in development - please use a pen and paper')
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '3':
         print('you can review the case file for the case in this menu')
+        print('')
+        print(CaseGen.read_case_file())
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '4':
         print('you can search for clues in the crime scene in this menu')
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '5':
         print('you can submit who you think is the culprit, with the factual evidence in this menu')
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '6':
         print('You can view all the suspects profiles here')
+        print('')
         SuspectInformation.generate_all_suspects_information()
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '7':
         print('')
         print('--- Detective information and current case successfully saved---')
         print('--- Please remember the name of your detective account to revisit the case---')
     else:
         print('invalid input. please try again..')
+        print('')
+        time.sleep(4)
+        commands()
         
 def user_menu_interaction_with_read(user_choice):
     if user_choice == '1':
@@ -85,16 +113,34 @@ def user_menu_interaction_with_read(user_choice):
         print(f'Detective Name: {detective_name}')
         print(f'Detective Fame: {fame}')
         print(f'Number of Cases Solved: {cases_solved}')
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '2':
-        print('you can open, read and edit your notebook in this menu')
+        print('this feature is still in development - please use a pen and paper')
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '3':
         print('you can review the case file for the case in this menu')
+        print('')
+        print(CaseGen.read_case_file())
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '4':
         print('you can search for clues in the crime scene in this menu')
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '5':
         print('you can submit who you think is the culprit, with the factual evidence in this menu')
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '6':
         print('You can view all the suspects profiles here')
+        print('')
         print(SuspectInformation.read_suspect_1_report())
         print('')
         print(SuspectInformation.read_suspect_2_report())
@@ -104,12 +150,18 @@ def user_menu_interaction_with_read(user_choice):
         print(SuspectInformation.read_suspect_4_report())
         print('')
         print(SuspectInformation.read_suspect_5_report())
+        print('')
+        time.sleep(4)
+        commands()
     elif user_choice == '7':
         print('')
         print('--- Detective information and current case successfully saved---')
         print('--- Please remember the name of your detective account to revisit the case---')
     else:
         print('invalid input. please try again..')
+        print('')
+        time.sleep(4)
+        commands()
 
 # The main flow of the game based on whether the save files exist
 if os.path.exists(case_file_file_path) and os.path.exists(case_data_file_path) and os.path.exists(detective_data_file_path) and os.path.exists(suspects_info_file_path) and os.path.exists(suspect_1_file_path) and os.path.exists(suspect_2_file_path) and os.path.exists(suspect_3_file_path) and os.path.exists(suspect_4_file_path) and os.path.exists(suspect_5_file_path):
@@ -123,11 +175,14 @@ if os.path.exists(case_file_file_path) and os.path.exists(case_data_file_path) a
         time.sleep(1)
 
         print('The case is all yours, detective...')
+        time.sleep(4)
         commands()
         print('')
 
         while True:
+            print('')
             user_menu_choice = input('Enter your choice here --> ')
+            print('')
             if user_menu_choice == '7':
                 user_menu_interaction_with_read(user_menu_choice)
                 break
@@ -159,11 +214,14 @@ if os.path.exists(case_file_file_path) and os.path.exists(case_data_file_path) a
         time.sleep(1)
 
         print('The case is all yours, detective...')
+        time.sleep(4)
         commands()
         print('')
 
         while True:
+            print('')
             user_menu_choice = input('Enter your choice here --> ')
+            print('')
             if user_menu_choice == '7':
                 user_menu_interaction(user_menu_choice)
                 break
@@ -195,11 +253,14 @@ else:
     time.sleep(1)
 
     print('The case is all yours, detective...')
+    time.sleep(4)
     commands()
     print('')
 
     while True:
+        print('')
         user_menu_choice = input('Enter your choice here --> ')
+        print('')
         if user_menu_choice == '7':
             user_menu_interaction(user_menu_choice)
             break
