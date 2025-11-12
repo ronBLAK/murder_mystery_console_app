@@ -37,13 +37,13 @@ def question_start_solve():
 # function to display the commands that the user can choose
 def commands():
     print('')
-    print('1. view detective profile')
-    print('2. open your notebook')
-    print('3. view case file')
-    print('4. search for clues at the crime scene')
-    print('5. open solve and submit menu')
-    print('6. view suspect information')
-    print('7. exit')
+    print('1. exit')
+    print('2. view detective profile')
+    print('3. open your notebook')
+    print('4. view case file')
+    print('5. search for clues at the crime scene')
+    print('6. open solve and submit menu')
+    print('7. view suspect information')
     print('')
 
 print("you have been transferred to the detective wing of the police department.")
@@ -56,7 +56,11 @@ print('')
 
 # defines all actions available to detective in investigator menu, and their criteria
 def user_menu_interaction(user_choice):
-    if user_choice == '1':
+    if user_choice == '1': # exit
+        print('')
+        print('--- Detective information and current case successfully saved---')
+        print('--- Please remember the name of your detective account to revisit the case---')
+    elif user_choice == '2': # view detective profile
         print('')
         print('Detective Profile:')
         print('')
@@ -66,39 +70,35 @@ def user_menu_interaction(user_choice):
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '2':
+    elif user_choice == '3': # open notebook
         print('this feature is still in development - please use a pen and paper')
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '3':
+    elif user_choice == '4': # view case file
         print('you can review the case file for the case in this menu')
         print('')
         print(CaseGen.read_case_file())
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '4':
+    elif user_choice == '5': # clue search
         print('you can search for clues in the crime scene in this menu')
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '5':
+    elif user_choice == '6': # solve and submit
         print('you can submit who you think is the culprit, with the factual evidence in this menu')
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '6':
+    elif user_choice == '7': # view suspect information
         print('You can view all the suspects profiles here')
         print('')
         SuspectInformation.generate_all_suspects_information()
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '7':
-        print('')
-        print('--- Detective information and current case successfully saved---')
-        print('--- Please remember the name of your detective account to revisit the case---')
     else:
         print('invalid input. please try again..')
         print('')
@@ -106,7 +106,11 @@ def user_menu_interaction(user_choice):
         commands()
         
 def user_menu_interaction_with_read(user_choice):
-    if user_choice == '1':
+    if user_choice == '1': # exit
+        print('')
+        print('--- Detective information and current case successfully saved---')
+        print('--- Please remember the name of your detective account to revisit the case---')
+    elif user_choice == '2': # view detective profile
         print('')
         print('Detective Profile:')
         print('')
@@ -116,29 +120,29 @@ def user_menu_interaction_with_read(user_choice):
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '2':
+    elif user_choice == '3': # open notebook
         print('this feature is still in development - please use a pen and paper')
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '3':
+    elif user_choice == '4': # view case file
         print('you can review the case file for the case in this menu')
         print('')
         print(CaseGen.read_case_file())
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '4':
+    elif user_choice == '5': # clue search
         print('you can search for clues in the crime scene in this menu')
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '5':
+    elif user_choice == '6': # solve and submit
         print('you can submit who you think is the culprit, with the factual evidence in this menu')
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '6':
+    elif user_choice == '7': # view suspect information
         print('You can view all the suspects profiles here')
         print('')
         print(SuspectInformation.read_suspect_1_report())
@@ -153,10 +157,6 @@ def user_menu_interaction_with_read(user_choice):
         print('')
         time.sleep(4)
         commands()
-    elif user_choice == '7':
-        print('')
-        print('--- Detective information and current case successfully saved---')
-        print('--- Please remember the name of your detective account to revisit the case---')
     else:
         print('invalid input. please try again..')
         print('')
