@@ -12,22 +12,12 @@ class WitnessGen:
         'heard': ['gunshots', 'sounds of the victim', 'a loud, unknown sound, from the location of the murder']
     }
     
-    # opening the case data save file to pull required information from
-    with open('case data.json', 'r') as file:
-        case_data = json.load(file)
-    
-    # all the pulled saved data from the case data, that is required to construct the witness data
-    culprit_name = case_data['culprit name']
-    suspects_list = case_data['selected suspects']
-    is_witness_present = case_data['witness presence']
-    witness_number = case_data['witness number']
-    
     
     
     
     # generate the witnesses procedurally, just like the case data
     def generate_witnesses(is_witness_present, witness_number, witness_name, witness_mode_of_perception, event_witnessed, is_witness_suspect, save = True):
-        # all the variables the function needs to function - the dictionary and other derived values
+        # all the variables the function needs to function - the lists and other derived values
         witness_data = {
             'is witness present': is_witness_present,
             'witness number': witness_number,
@@ -59,6 +49,7 @@ class WitnessGen:
                     witness_description_list.append(witness_description)
                     
                 print(witness_description)
+                print('')
                 
             if save:
                 Save.save_witness_file(witness_description_list)
@@ -135,14 +126,24 @@ class WitnessGen:
     def generate_witness_and_witness_file_random():
         witness_data_save_file = 'witness data.json' # stores the path to the file that needs to save the witness data
         
+        # opening the case data save file to pull required information from
+        with open('case data.json', 'r') as file:
+            case_data = json.load(file)
+        
+        # all the pulled saved data from the case data, that is required to construct the witness data
+        culprit_name = case_data['culprit name']
+        suspects_list = case_data['selected suspects']
+        is_witness_present = case_data['witness presence']
+        witness_number = case_data['witness number']
+        
         # sets each of the values returned from the helper methods as components into its own variables to be passed into the generate witnesses function as parameters
-        selected_mode_of_perception = WitnessGen.get_mode_of_perception(WitnessGen.witness_mode_of_perception, WitnessGen.witness_number)
-        selected_event_witnessed = WitnessGen.get_event_witnessed(selected_mode_of_perception, WitnessGen.event_witnessed_dict, WitnessGen.witness_number)
-        selected_witness_names = WitnessGen.get_witness_names(WitnessGen.culprit_name, CaseGen.culprit_name_list, WitnessGen.witness_number)
-        selected_is_witness_suspect = WitnessGen.get_is_witness_suspect(WitnessGen.suspects_list, selected_witness_names, WitnessGen.witness_number)
+        selected_mode_of_perception = WitnessGen.get_mode_of_perception(WitnessGen.witness_mode_of_perception, witness_number)
+        selected_event_witnessed = WitnessGen.get_event_witnessed(selected_mode_of_perception, WitnessGen.event_witnessed_dict, witness_number)
+        selected_witness_names = WitnessGen.get_witness_names(culprit_name, CaseGen.culprit_name_list, witness_number)
+        selected_is_witness_suspect = WitnessGen.get_is_witness_suspect(suspects_list, selected_witness_names, witness_number)
         
         # calls the functions required to generate the witness data and witness files
-        WitnessGen.generate_witnesses(WitnessGen.is_witness_present, WitnessGen.witness_number, selected_witness_names, selected_mode_of_perception, selected_event_witnessed, selected_is_witness_suspect)
+        WitnessGen.generate_witnesses(is_witness_present, witness_number, selected_witness_names, selected_mode_of_perception, selected_event_witnessed, selected_is_witness_suspect)
         
         with open(witness_data_save_file, 'r') as json_file:
             witness_data = json.load(json_file)
@@ -153,7 +154,4 @@ class WitnessGen:
         pulled_witness_names = witness_data.get('witness names')
         pulled_is_witness_suspect = witness_data.get('is witness suspect')
         
-        WitnessGen.generate_witnesses_file(WitnessGen.witness_number, pulled_witness_names, pulled_mode_of_perception, pulled_event_witnessed, pulled_is_witness_suspect)
-        
-        
-WitnessGen.generate_witness_and_witness_file_random()
+        WitnessGen.generate_witnesses_file(witness_number, pulled_witness_names, pulled_mode_of_perception, pulled_event_witnessed, pulled_is_witness_suspect)
