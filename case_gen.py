@@ -4,7 +4,7 @@ from save import Save
 import json
 
 class CaseGen:
-    culprit_name_list = ["Jerome", "Max", "Zach", "Tom", "Carl", "Tim", "Cooper", "Shaw", "Mat"] # holds the different possible names for the culprit
+    culprit_name_list = ["Jerome", "Max", "Zach", "Tom", "Carl", "Tim", "Cooper", "Shaw", "Mat", "Otto", "George", "Ben", "Brent", "Vincent", "Stretton", "Josh", "Reuben", "Alex", "Mason", "Jamie", "Corey", "Ian"] # holds the different possible names for the culprit
     victim_name_list = ['Sten', 'Troy', 'Dan'] # holds the different possible names for the victim
     murder_weapon_list = ['knife', 'gun', 'baseball bat', 'water'] # holds the different possible murder weapons
     murder_location_list = ['beach', 'park', 'house'] # holds the different possible murder locations
@@ -157,12 +157,12 @@ class CaseGen:
         
         selected_suspects.insert(culprit_index_in_suspects_list, culprit) # inserts the culprit name at the generated index value
         
-        remaining_random_suspects = list(filter(lambda item: item != culprit, suspects)) # filters the remaining suspects after the culprit and picks 4 at random
+        remaining_random_suspects = list(filter(lambda item: item != culprit, suspects)) # filters the remaining suspects, after taking the culprit out the the list, and saves this new list to a new variable
         
         # loops through the entire selected suspects list to insert the random suspects in all the spots that do not match the randomly generated index value (where the culprit is present)
         for i in range(len(selected_suspects)):
             if i != culprit_index_in_suspects_list:
-                selected_suspects[i] = remaining_random_suspects.pop(0)
+                selected_suspects[i] = remaining_random_suspects.pop(random.randrange(len(remaining_random_suspects)))
                 
         # print(culprit_index_in_suspects_list)
         return selected_suspects
@@ -170,8 +170,6 @@ class CaseGen:
     # calls all the methods that work together to show the detective the case that they are dealing with
     def generate_case_and_case_file_random():
         case_data_save_file = 'case data.json' # stores the file name that needs to be opened into a variable
-        
-        print('')
         
         # set the values returned in each of the separate case component funciton to its own variable
         selected_culprit_name = CaseGen.get_culprit_name(CaseGen.culprit_name_list)
@@ -208,5 +206,4 @@ class CaseGen:
         formatted_suspects_list = ', '.join(pulled_suspects_list)
 
         CaseGen.generate_case_file(pulled_victim_name, pulled_murder_weapon, pulled_has_injury, pulled_injury_location, pulled_murder_location, pulled_murder_type, pulled_weather, pulled_time_of_day, pulled_witness_number, pulled_suspects_list, formatted_suspects_list)
-        print('')
         return pulled_culprit_name
